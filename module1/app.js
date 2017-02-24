@@ -2,43 +2,43 @@
 'use strict';
 
 angular.module('LunchCheck', [])
-.controller('DIController', DIController);
+.controller('LunchCheckController', LunchCheckController);
 
-DIController.$inject = ['$scope'];
-function DIController($scope) {
+LunchCheckController.$inject = ['$scope'];
+function LunchCheckController($scope) {
   $scope.message = " ";
   $scope.inputtext = "";
   $scope.customStyle = {};
 
-  $scope.LunchCheckController = function () {
+  $scope.checkInputText = function () {
+      var arrayOfStrings = $scope.inputtext.split(',');
+      var totalNum = calculateTotalNum(arrayOfStrings);
 
-  var space = "";
-  var comma = ',';
+      if(totalNum <= 0) {
+        $scope.message = "Please enter data first";
+        $scope.customStyle.style = {"color":"red", "border-color":"red" , "border":"1px solid"};
+      }
+      else if(totalNum <= 3) {
+        $scope.message = "Enjoy!";
+        $scope.customStyle.style = {"color":"green","border-color":"green" , "border":"1px solid"};
+      }
+      else {
+        $scope.message = "Too much!";
+        $scope.customStyle.style = {"color":"green","border-color":"green", "border":"1px solid"};
+      }
+    };
+}
 
-  var arrayOfStrings = $scope.inputtext.split(comma);
-
+function calculateTotalNum(arrayOfStrings){
   console.log("array size:" + arrayOfStrings.length);
   console.log(arrayOfStrings);
   var totalNum = 0;
   for(var  i =0; i<arrayOfStrings.length; i++){
-      if(arrayOfStrings[i].trim() != space) {
+      if(arrayOfStrings[i].trim() != "") {
         totalNum++;
       }
   }
   console.log("totalNum:" + totalNum);
-  if(totalNum <= 0) {
-    $scope.message = "Please enter data first";
-    $scope.customStyle.style = {"color":"red", "border-color":"red" , "border":"1px solid"};
-  }
-  else if(totalNum <= 3) {
-    $scope.message = "Enjoy!";
-    $scope.customStyle.style = {"color":"green","border-color":"green" , "border":"1px solid"};
-  }
-  else {
-    $scope.message = "Too much!";
-    $scope.customStyle.style = {"color":"green","border-color":"green", "border":"1px solid"};
-  }
-};
+  return totalNum;
 }
-
 })();

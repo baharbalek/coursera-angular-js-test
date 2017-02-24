@@ -11,7 +11,7 @@
       <script src="app.js"></script>
   </head>
 <body >
-   <div class="container" ng-controller='DIController'>
+   <div class="container" ng-controller='LunchCheckController'>
      <h1>Lunch Checker</h1>
 
          <div class="form-group">
@@ -20,7 +20,7 @@
              class="form-control" ng-model="inputtext">
          </div>
          <div class="form-group">
-             <button class="btn btn-default" ng-click='LunchCheckController()'>Check If Too Much</button>
+             <button class="btn btn-default" ng-click='checkInputText();'>Check If Too Much</button>
          </div>
          <div class="form-group message" ng-style="customStyle.style">
            {{message}}
